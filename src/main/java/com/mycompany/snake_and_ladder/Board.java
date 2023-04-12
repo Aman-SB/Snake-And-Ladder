@@ -12,7 +12,6 @@ import java.util.ArrayList;
 
 public class Board {
     public class Pair{
-        int position;
         int X_cordinate;
         int y_cordinate;
         
