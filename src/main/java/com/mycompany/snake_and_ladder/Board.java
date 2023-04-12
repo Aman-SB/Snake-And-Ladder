@@ -12,12 +12,12 @@ import java.util.ArrayList;
 
 public class Board {
     public class Pair{
-        int X_cordinate;
+        int x_cordinate;
         int y_cordinate;
         
-        Pair(int x_cord,int y_cord){
-            this.X_cordinate=x_cord;
-            this.y_cordinate=y_cord;
+        Pair(int x_cord ,int y_cord){
+            this.x_cordinate = x_cord;
+            this.y_cordinate = y_cord;
         }
     }
     
@@ -52,12 +52,26 @@ public class Board {
         
     }
     
-    public static void main(String[] args) {
-        Board board = new Board();
-        for(int curr_Position = 1 ; curr_Position < board.position_cordinates.size() ; curr_Position++)
-        {
-            System.out.println(curr_Position + " x_cord : " + board.position_cordinates.get(curr_Position).X_cordinate +
-                    " y_cord : " + board.position_cordinates.get(curr_Position).y_cordinate );
+    int getXCoordinate(int position){
+        if(position >= 1 && position <= 100){
+            return position_cordinates.get(position).x_cordinate;
         }
+        return -1;
     }
+    
+    int getYCoordinate(int position){
+        if(position >= 1 && position <= 100){
+            return position_cordinates.get(position).y_cordinate;
+        }
+        return -1;
+    }
+    
+//    public static void main(String[] args) {
+//        Board board = new Board();
+//        for(int curr_Position = 1 ; curr_Position < board.position_cordinates.size() ; curr_Position++)
+//        {
+//            System.out.println(curr_Position + " x_cord : " + board.position_cordinates.get(curr_Position).x_cordinate +
+//                    " y_cord : " + board.position_cordinates.get(curr_Position).y_cordinate );
+//        }
+//    }
 }
