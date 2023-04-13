@@ -54,7 +54,7 @@ public class SnakeAndLadder extends Application {
             }
         }
         
-        Image img = new Image("file:///E:/Java/learning_application/Snake_And_Ladder/src/main/image/snakes-ladders-board-game-start-600w-163384724.png");
+        Image img = new Image("file:///E:/Java/learning_application/Snake_And_Ladder/src/main/image/last-Snake-ladder-image.png");
         ImageView board = new ImageView();
         board.setImage(img);
         board.setFitHeight(total_height_board);
