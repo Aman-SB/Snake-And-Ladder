@@ -67,21 +67,23 @@ public class SnakeAndLadder extends Application {
         
         player_One_Button.setTranslateY(button_Line);
         player_One_Button.setTranslateX(40);
+        player_One_Button.setDisable(true);
         player_Two_Button.setTranslateY(button_Line);
         player_Two_Button.setTranslateX(295);
+        player_Two_Button.setDisable(true);
         start_Button.setTranslateY(button_Line);
         start_Button.setTranslateX(165);
         
         // Displaying the Information
         
-        Label player_One_Label = new Label("Player 1 Turn");
-        Label player_Two_Label = new Label("Player 2 Turn");
+        Label player_One_Label = new Label("");
+        Label player_Two_Label = new Label("");
         Label dice_Label = new Label("Start The Game");
         
         player_One_Label.setTranslateY(information_Line);
-        player_One_Label.setTranslateX(41);
+        player_One_Label.setTranslateX(50);
         player_Two_Label.setTranslateY(information_Line);
-        player_Two_Label.setTranslateX(295);
+        player_Two_Label.setTranslateX(305);
         dice_Label.setTranslateY(information_Line);
         dice_Label.setTranslateX(166);
         
@@ -90,6 +92,27 @@ public class SnakeAndLadder extends Application {
         
         player_Two = new Player(tileSize - 5, Color.BLUE , " Ankit");
         
+        //start button function 
+        start_Button.setOnAction(new EventHandler<ActionEvent>(){
+            @Override
+            public void handle(ActionEvent actionEvent){
+                game_Started = true;
+                dice_Label.setText("Game Started");
+                start_Button.setDisable(true);
+                 
+                player_One_Turn = true;
+                player_One_Label.setText("Your Turn " );
+                player_One_Button.setDisable(false);
+                player_One.bringTostartingPosition();
+                
+                player_Two_Turn = false; 
+                player_Two_Label.setText("");
+                player_Two_Button.setDisable(true);
+                player_Two.bringTostartingPosition();
+            }
+        });
+        
+        //player one button working
         player_One_Button.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent){
@@ -97,16 +120,31 @@ public class SnakeAndLadder extends Application {
                     if(player_One_Turn){
                         int dice_Value = dice.getRolledDiceValue();
                         dice_Label.setText("Dice Value : " + dice_Value);
-                        //Winning Condition
-                        
                         player_One.movePlayer(dice_Value);
-                        player_One_Turn = false;
-                        player_One_Button.setDisable(true);
-                        player_One_Label.setText("");
-                        
-                        player_Two_Turn = true;
-                        player_Two_Button.setDisable(false);
-                        player_Two_Label.setText("Your Turn" + player_Two.getName());
+                        //Winning Condition
+                        if(player_One.isWinner()){
+                            player_One_Turn = false;
+                            player_One_Button.setDisable(true);
+                            player_One_Label.setText("");
+
+                            player_Two_Turn = true;
+                            player_Two_Button.setDisable(true);
+                            player_Two_Label.setText("");
+                            
+                            start_Button.setDisable(false);
+                            start_Button.setText("Restart");
+                            dice_Label.setText("Winner " + player_One.getName());
+                            game_Started = false;
+                        }
+                        else{
+                            player_One_Turn = false;
+                            player_One_Button.setDisable(true);
+                            player_One_Label.setText("");
+
+                            player_Two_Turn = true;
+                            player_Two_Button.setDisable(false);
+                            player_Two_Label.setText("Your Turn" );
+                        }
                     }
                 }
             }
@@ -120,34 +158,34 @@ public class SnakeAndLadder extends Application {
                     if(player_Two_Turn){
                         int dice_Value = dice.getRolledDiceValue();
                         dice_Label.setText("Dice Value : " + dice_Value);
-                        //Winning Condition
-                        
                         player_Two.movePlayer(dice_Value);
-                        player_Two_Turn = false;
-                        player_Two_Button.setDisable(true);
-                        player_Two_Label.setText("");
-                        
-                        player_One_Turn = true;
-                        player_One_Button.setDisable(false);
-                        player_One_Label.setText("Your Turn " + player_One.getName());
+                        //Winning Condition
+                        if(player_Two.isWinner()){
+                            player_Two_Turn = false;
+                            player_Two_Button.setDisable(true);
+                            player_Two_Label.setText("");
+
+                            player_One_Turn = true;
+                            player_One_Button.setDisable(true);
+                            player_One_Label.setText("");
+                            
+                            start_Button.setDisable(false);
+                            start_Button.setText("Restart");
+                            dice_Label.setText("Winner " + player_Two.getName());
+                            game_Started = false;
+                        }
+                        else
+                        {
+                            player_Two_Turn = false;
+                            player_Two_Button.setDisable(true);
+                            player_Two_Label.setText("");
+
+                            player_One_Turn = true;
+                            player_One_Button.setDisable(false);
+                            player_One_Label.setText("Your Turn ");
+                        }
                     }
                 }
-            }
-        });
-        
-        //start button
-        
-        start_Button.setOnAction(new EventHandler<ActionEvent>(){
-            @Override
-            public void handle(ActionEvent actionEvent){
-                game_Started = true;
-                dice_Label.setText("Game Started");
-                start_Button.setDisable(true);
-                player_One_Turn = true;
-                player_One_Label.setText("Your Turn " + player_One.getName());
-                player_Two_Turn = false; 
-                player_Two_Label.setText("");
-                player_Two_Button.setDisable(true);
             }
         });
         

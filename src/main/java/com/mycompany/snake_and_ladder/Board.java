@@ -11,6 +11,7 @@ package com.mycompany.snake_and_ladder;
 import java.util.ArrayList;
 
 public class Board {
+    
     public class Pair{
         int x_cordinate;
         int y_cordinate;
@@ -23,9 +24,12 @@ public class Board {
     
     ArrayList<Pair> position_cordinates;
     
+    ArrayList<Integer> snake_And_Ladder_Position ;    
+    
     public Board(){
         position_cordinates = new ArrayList<>();
         populatePositionCordinates();
+        populateSnakeAndLadder();
     }
     
     private void populatePositionCordinates(){
@@ -49,7 +53,37 @@ public class Board {
                 position_cordinates.add(new Pair(curr_x_cord,curr_y_cord));
             }
         }
+    }
+    
+    private void populateSnakeAndLadder(){
+        snake_And_Ladder_Position = new ArrayList<Integer>();
+        for (int i = 0; i <= 100; i++) {
+            snake_And_Ladder_Position.add(i);
+        }
         
+        //Ladder positioning
+        snake_And_Ladder_Position.set(4,25);
+        snake_And_Ladder_Position.set(21,39);
+        snake_And_Ladder_Position.set(29,74);
+        snake_And_Ladder_Position.set(43,76);
+        snake_And_Ladder_Position.set(63,80);
+        snake_And_Ladder_Position.set(71,89);
+        
+        //Snake Positioning
+        snake_And_Ladder_Position.set(30,7);
+        snake_And_Ladder_Position.set(47,15);
+        snake_And_Ladder_Position.set(56,19);
+        snake_And_Ladder_Position.set(82,42);
+        snake_And_Ladder_Position.set(92,75);
+        snake_And_Ladder_Position.set(98,55);
+    }
+    
+    public int getNewPosition(int current_Position){
+        if(current_Position >= 0 && current_Position <= 100)
+        {
+            return snake_And_Ladder_Position.get(current_Position);
+        }
+        return -1;
     }
     
     int getXCoordinate(int position){
